@@ -10,12 +10,12 @@ const input =
 export default async function AdminSchedulePage({
   searchParams,
 }: {
-  searchParams: Promise<{ success?: string; edit?: string }>
+  searchParams: Promise<{ success?: string; edit?: string; error?: string }>
 }) {
-  const { success, edit } = await searchParams
+  const { success, edit, error: actionError } = await searchParams
   const supabase = await createClient()
 
-  const { data } = await supabase
+  const { data, error: loadError } = await supabase
     .from('schedule')
     .select('*')
     .order('day_date', { ascending: true })
@@ -29,6 +29,15 @@ export default async function AdminSchedulePage({
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-bold text-crimson mb-6">Schedule</h1>
+
+      {(actionError || loadError) && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6 text-sm">
+          <p className="font-semibold">Could not {loadError ? 'load' : 'save'} schedule: {actionError ?? loadError?.message}</p>
+          {/schema cache|does not exist/i.test(actionError ?? loadError?.message ?? '') && (
+            <p className="mt-1">The database table is missing. Run <code>phase2-migration.sql</code> in the Supabase SQL editor.</p>
+          )}
+        </div>
+      )}
 
       {success && (
         <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6 text-sm">

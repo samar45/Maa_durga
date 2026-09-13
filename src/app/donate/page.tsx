@@ -1,8 +1,8 @@
 import DonateForm from '@/components/DonateForm'
 
 export const metadata = {
-  title: 'Donate — Durga Maa Puja',
-  description: 'Support our annual Durga Maa Puja celebration with your donation.',
+  title: 'Donate — Jay Maa Durga',
+  description: 'Support our annual Jay Maa Durga celebration with your donation.',
 }
 
 export default function DonatePage() {

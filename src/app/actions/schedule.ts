@@ -46,7 +46,7 @@ export async function saveScheduleItem(formData: FormData) {
   const { error } = id
     ? await supabase.from('schedule').update(row).eq('id', id)
     : await supabase.from('schedule').insert(row)
-  if (error) throw new Error(error.message)
+  if (error) redirect(`/admin/schedule?error=${encodeURIComponent(error.message)}`)
 
   revalidatePath('/schedule')
   redirect('/admin/schedule?success=1')

@@ -42,3 +42,19 @@ export async function saveHistoryEntry(formData: FormData) {
   revalidatePath('/history')
   redirect('/admin/history?success=1')
 }
+
+export async function removeHistoryImage(id: string, url: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+  const { data: role } = await supabase.from('user_roles').select('role').eq('user_id', user.id).maybeSingle()
+  if (!role) throw new Error('Unauthorized')
+
+  const { data: existing } = await supabase.from('history').select('image_urls').eq('id', id).single()
+  const image_urls = (existing?.image_urls ?? []).filter((u: string) => u !== url)
+  // ponytail: only unlinks from the entry; the Cloudinary file stays (free tier is 25 GB). Delete there if space matters.
+  await supabase.from('history').update({ image_urls }).eq('id', id)
+
+  revalidatePath('/history')
+  revalidatePath('/admin/history')
+}

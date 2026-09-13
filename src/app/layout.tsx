@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import Providers from '@/components/Providers'
 
 export const metadata: Metadata = {
-  title: 'Durga Maa Puja',
+  title: 'Jay Maa Durga',
   description: 'Celebrating the divine mother — year-wise memories, gallery, and history.',
 }
 

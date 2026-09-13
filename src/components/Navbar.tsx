@@ -68,7 +68,7 @@ export default function Navbar() {
     <header className="bg-crimson text-white shadow-lg sticky top-0 z-40">
       <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="font-bold text-xl text-gold-light tracking-wide">
-          Durga Maa Puja
+          Jay Maa Durga
         </Link>
 
         {/* Desktop */}

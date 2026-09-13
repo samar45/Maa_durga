@@ -7,7 +7,7 @@ export default function WhatsAppShare({ year }: { year: number }) {
 
   function getUrl() {
     const base = typeof window !== 'undefined' ? window.location.origin : ''
-    const text = `Durga Maa Puja ${year} Gallery: ${base}/gallery/${year}`
+    const text = `Jay Maa Durga ${year} Gallery: ${base}/gallery/${year}`
     return `https://wa.me/?text=${encodeURIComponent(text)}`
   }
 

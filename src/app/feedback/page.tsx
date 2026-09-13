@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { submitFeedback } from '@/app/actions/feedback'
 
 export const metadata = {
-  title: 'Feedback — Durga Maa Puja',
+  title: 'Feedback — Jay Maa Durga',
   description: 'Tell us how we can make the puja better.',
 }
 

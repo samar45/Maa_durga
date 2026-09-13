@@ -35,7 +35,7 @@ export default async function Home() {
             <T k="hero_mantra" />
           </p>
           <h1 className="text-5xl md:text-7xl font-bold text-amber-50 mb-4">
-            Durga Maa Puja
+            Jay Maa Durga
           </h1>
           <p className="text-amber-200 text-lg mb-10 max-w-md mx-auto">
             <T k="hero_tagline" />

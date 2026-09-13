@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { saveHistoryEntry } from '@/app/actions/history'
+import { saveHistoryEntry, removeHistoryImage } from '@/app/actions/history'
 import type { HistoryEntry } from '@/types'
 
 export default async function AdminHistoryPage({
@@ -91,6 +91,35 @@ export default async function AdminHistoryPage({
             </a>
           )}
         </form>
+
+        {editing && editing.image_urls?.length > 0 && (
+          <div className="mt-6 border-t border-gray-100 pt-4">
+            <p className="text-sm font-medium text-gray-700 mb-2">Current images</p>
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              {editing.image_urls.map((url) => (
+                <div key={url} className="relative aspect-square rounded overflow-hidden bg-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={url} alt="" className="w-full h-full object-cover" />
+                  <form
+                    action={async () => {
+                      'use server'
+                      await removeHistoryImage(editing.id, url)
+                    }}
+                    className="absolute top-1 right-1"
+                  >
+                    <button
+                      type="submit"
+                      aria-label="Remove image"
+                      className="bg-red-600 hover:bg-red-700 text-white text-xs w-6 h-6 rounded-full shadow"
+                    >
+                      ✕
+                    </button>
+                  </form>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="space-y-3">
