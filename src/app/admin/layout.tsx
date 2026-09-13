@@ -21,8 +21,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-crimson-dark text-white px-4 py-3 flex items-center justify-between text-sm">
-        <div className="flex items-center gap-6">
+      <div className="bg-crimson-dark text-white px-4 py-3 flex flex-wrap items-center justify-between gap-y-2 text-sm">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
           <span className="font-semibold">Admin Panel</span>
           <Link href="/admin/upload" className="text-amber-200 hover:text-white transition-colors">
             Upload Photos
