@@ -11,25 +11,10 @@ export default function DonateForm() {
   const [selected, setSelected] = useState<number>(101)
   const [custom, setCustom] = useState('')
   const [showCustom, setShowCustom] = useState(false)
-  const [paid, setPaid] = useState(false)
 
   const amount = showCustom ? parseInt(custom) || 0 : selected
 
   const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR${amount > 0 ? `&am=${amount}` : ''}`
-
-  if (paid) {
-    return (
-      <div className="text-center py-10">
-        <div className="text-5xl mb-4">🙏</div>
-        <h2 className="text-2xl font-bold text-crimson mb-2">Jai Maa Durga!</h2>
-        <p className="text-gray-600">Thank you for your generous contribution.<br />May Maa bless you and your family.</p>
-        <button onClick={() => { setPaid(false); setSelected(101); setCustom(''); setShowCustom(false) }}
-          className="mt-6 text-sm text-crimson underline">
-          Make another donation
-        </button>
-      </div>
-    )
-  }
 
   return (
     <div className="max-w-sm mx-auto">
@@ -101,7 +86,6 @@ export default function DonateForm() {
       {/* UPI deep link — works on mobile */}
       <a
         href={upiLink}
-        onClick={() => setTimeout(() => setPaid(true), 2000)}
         className="flex items-center justify-center gap-2 w-full bg-crimson hover:bg-crimson-dark text-white py-3.5 rounded-xl font-bold text-base transition-colors"
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">

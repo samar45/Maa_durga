@@ -1,31 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import T from '@/components/T'
 import type { ScheduleItem } from '@/types'
+import { fmtRange, fmtDate } from '@/lib/format'
 
 export const revalidate = 0
 
 const MEALS = ['breakfast', 'lunch', 'dinner'] as const
 
-function fmtTime(t: string | null) {
-  if (!t) return ''
-  const [h, m] = t.split(':').map(Number)
-  const ampm = h < 12 ? 'AM' : 'PM'
-  return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${ampm}`
-}
-
-function fmtRange(start: string | null, end: string | null) {
-  if (!start) return ''
-  return end ? `${fmtTime(start)} - ${fmtTime(end)}` : fmtTime(start)
-}
-
-function fmtDate(d: string) {
-  return new Date(`${d}T00:00:00`).toLocaleDateString('en-GB', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
-}
 
 export default async function SchedulePage() {
   const supabase = await createClient()
